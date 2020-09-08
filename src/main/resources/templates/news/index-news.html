@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <meta charset="UTF-8">
+    <title>Новости и оповещения</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var sortProperty = /*[[${sortProperty}]]*/ null;
+        var sortDesc = /*[[${sortDesc}]]*/ null;
+        var currentPage = /*[[${page.number}]]*/ 0;
+        var pageSize =/*[[${page.size}]]*/ 0;
+        /*]]>*/
+        $(document).ready(function(){
+            $("table#news-table thead th").each(function(){
+                var head = $(this);
+                if(head.attr('data-sort-prop')==sortProperty){
+                    head.append(sortDesc? '▾' : '▴');
+                }
+            });
+
+            $("table#news-table thead th").click(function() {
+                var headerSortPropName = $(this).attr("data-sort-prop");
+                if(headerSortPropName==sortProperty){
+                    window.location.href = window.location.pathname+
+                        '?page='+currentPage+'&size='+pageSize+'&sort='+ headerSortPropName+','+
+                        (sortDesc?'asc':'desc');
+                }else{
+                    window.location.href = window.location.pathname+
+                        '?page='+currentPage+'&size='+pageSize+'&sort='+ headerSortPropName+',asc';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="text-center" th:insert="fragments/header :: header" >...</div>
+<div class="container my-2">
+    <div th:switch="${page.content}" class="container my-2">
+        <p class="my-2">
+        <div sec:authorize="hasAuthority('GLOBAL ADMIN')">
+            <a href="/news/addForm" class="btn btn-primary"><i
+                    class="fas fa-plus ml-2">Добавить новость</i></a>
+        </div>
+        </p>
+        <div class="col-md-15">
+            <h2 th:case="null">Данных нет!</h2>
+            <div th:case="*">
+                <table class="table table-striped table-responsive-md">
+                    <thead>
+                    <tr>
+                        <th data-sort-prop="heading">Название</th>
+                        <th data-sort-prop="text">Текст</th>
+                        <th data-sort-prop="publicationDate">Дата публикации</th>
+                        <th >Изменить</th>
+                        <th >Удалить</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${page.content}">
+                        <td th:text="${item.heading}"></td>
+                        <td th:text="${item.text}"></td>
+                        <td th:text="${item.publicationDateString()}"></td>
+                        <div>
+                            <td><a th:href="@{/news/edit/{id}(id=${item.id})}" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
+                            <td><a th:href="@{/news/delete/{id}(id=${item.id})}" class="btn btn-primary"><i class="fas fa-times ml-2"></i></a></td>
+                        </div>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="pagination-div" th:with="sortParam=${sortProperty+','+(sortDesc?'desc':'asc')}">
+        <span th:if="${page.hasPrevious()}">
+            <a th:href="@{/news/list(page=${page.number - 1},size=${page.size}, sort=${sortParam})}">Previous</a>
+        </span>
+                    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                        <span th:unless="${page.number == i}">
+                 <a th:href="@{/news/list(page=${i},size=${page.size},sort=${sortParam})}">[[${i}+1]]</a>
+            </span>
+                    </th:block>
+                    <span th:if="${page.hasNext()}">
+            <a th:href="@{/news/list(page=${page.number+1},size=${page.size}, sort=${sortParam})}">Следующая</a>
+        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

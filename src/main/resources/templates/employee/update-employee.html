@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+<div class="text-center" th:insert="fragments/header :: header" >...</div>
+<div class="container my-5">
+    <h3>Update employee</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <form  th:action="@{/employee/update/{id}(id=${employee.id})}" th:object="${employee}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="surname" class="col-form-label">Surname</label>
+                            <input type="text" th:field="*{surname}" class="form-control" id="surname" placeholder="Surname">
+                            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="name" class="col-form-label">Name</label>
+                            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="patronymic" class="col-form-label">Patronymic</label>
+                            <input type="text" th:field="*{patronymic}" class="form-control" id="patronymic" placeholder="Patronymic">
+                            <span th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="birthday" class="col-form-label">Birthday</label>
+                            <input type="text" th:field="*{birthday}" class="form-control" id="birthday" placeholder="Birthday">
+                            <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="phone" class="col-form-label">Phone</label>
+                            <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Phone">
+                            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="specialization" class="col-form-label">Specialization</label>
+                            <input type="text" th:field="*{specialization}" class="form-control" id="specialization" placeholder="Specialization">
+                            <span th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <input type="submit" class="btn btn-primary" value="Update">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

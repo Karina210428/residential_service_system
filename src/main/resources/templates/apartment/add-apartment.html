@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление комнаты</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+<div class="text-center" th:insert="fragments/header :: header" >...</div>
+<div class="container my-5">
+    <h3>Добавление комнаты</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/apartment/add}" th:object="${apartment}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="number" class="col-form-label">Номер комнаты</label>
+                            <input type="number" th:min="1" th:field="*{number}" class="form-control" id="number" placeholder="House №">
+                            <span th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="Floor" class="col-form-label">Этаж</label>
+                            <input type="number" th:min="1" th:field="*{floor}" class="form-control" id="floor" placeholder="Floor">
+                            <span th:if="${#fields.hasErrors('floor')}" th:errors="*{floor}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="block" class="col-form-label">Блок</label>
+                            <input type="number" th:min="1" th:field="*{block}" class="form-control" id="block" placeholder="Block">
+                            <span th:if="${#fields.hasErrors('block')}" th:errors="*{block}" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value="Добавить">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

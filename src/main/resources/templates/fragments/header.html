@@ -1,0 +1,55 @@
+<div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/list">Сотрудники</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/occupant/list">Жильцы</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/list">Пользователи</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/request/list">Заявки</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/apartment/list">Комнаты</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/news/list">Новости</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/specialization/list">Специализации</a>
+                </li>
+
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-item" href="/logout" method="post">Выход</a>
+<!--                    <a class="nav-link dropdown-toggle"  data-toggle="dropdown"-->
+<!--                       aria-haspopup="true" aria-expanded="false">-->
+<!--                        <i class="fas fa-user"></i> Profile</a>-->
+<!--                    <div class="dropdown-menu dropdown-menu-right dropdown-default"-->
+<!--                         aria-labelledby="navbarDropdownMenuLink-333">-->
+<!--&lt;!&ndash;                        <a class="dropdown-item" href="/account">My account</a>&ndash;&gt;-->
+<!--                        <a class="dropdown-item" href="/logout" method="post">Log out</a>-->
+<!--                    </div>-->
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
