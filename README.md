@@ -6,19 +6,19 @@ The application allows you to view structured information from the database, as 
   
 <table>
   <tr>
-    <td>Login page</td>
+    <td>Information about requests</td>
   </tr>
   <tr>
     <td><img src="https://github.com/Karina210428/residential_service_system/blob/master/2%20(2).png" ></td>
   </tr>
     <tr>
-    <td>Login page</td>
+    <td>Create new request</td>
   </tr>
   <tr>
     <td><img src="https://github.com/Karina210428/residential_service_system/blob/master/3.png" ></td>
   </tr>
     <tr>
-    <td>Login page</td>
+    <td>Upadate request</td>
   </tr>
   <tr>
     <td><img src="https://github.com/Karina210428/residential_service_system/blob/master/4.png" ></td>
